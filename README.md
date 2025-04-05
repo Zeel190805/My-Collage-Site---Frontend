@@ -1,1 +1,1 @@
-CHARUSAT collage Web pages -- Fun 
+CHARUSAT collage Web pages -- for Fun 
