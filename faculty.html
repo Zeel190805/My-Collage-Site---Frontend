@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHARUSAT - Faculty</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="./logo3.jpg" alt="CHARUSAT Logo" class="logo-image">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="departments.html">Departments</a></li>
+                <li><a href="faculty.html" class="active">Faculty</a></li>
+                <li><a href="library.html">Library</a></li>
+                <li><a href="timetable.html">Timetable</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <h1>Our Faculty</h1>
+        <p>Meet our dedicated professors and staff committed to excellence in education and research.</p>
+        <div class="breadcrumb">
+            <a href="index.html">Home</a>
+            <span>/</span>
+            <a href="faculty.html">Faculty</a>
+        </div>
+    </section>
+
+    <section class="faculty">
+        <!-- Faculty Search and Filter -->
+        <div class="faculty-filter">
+            <div class="search-box">
+                <input type="text" placeholder="Search faculty..." id="faculty-search">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="department-filter">
+                <select id="department-select">
+                    <option value="all">All Departments</option>
+                    <option value="computer-science">Computer Science</option>
+                    <option value="physics">Physics</option>
+                    <option value="business">Business Administration</option>
+                    <option value="literature">Literature</option>
+                    <option value="chemistry">Chemistry</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Faculty Grid -->
+        <div class="faculty-grid">
+            <!-- Computer Science Professors -->
+            <div class="faculty-card" data-department="computer-science">
+                <div class="faculty-image" style="background-image: url('https://randomuser.me/api/portraits/men/11.jpg');"></div>
+                <div class="faculty-info">
+                    <h3>Dr. Alan Turing</h3>
+                    <p>Professor, Computer Science</p>
+                    <p class="faculty-credentials">Ph.D. in Computer Science, MIT</p>
+                    <p class="faculty-specialty">Artificial Intelligence, Machine Learning</p>
+                    <div class="faculty-social">
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-globe"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faculty-card" data-department="computer-science">
+                <div class="faculty-image" style="background-image: url('https://randomuser.me/api/portraits/women/65.jpg');"></div>
+                <div class="faculty-info">
+                    <h3>Dr. Grace Hopper</h3>
+                    <p>Associate Professor, Computer Science</p>
+                    <p class="faculty-credentials">Ph.D. in Computer Engineering, Stanford</p>
+                    <p class="faculty-specialty">Programming Languages, Compiler Design</p>
+                    <div class="faculty-social">
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-globe"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Physics Professors -->
+            <div class="faculty-card" data-department="physics">
+                <div class="faculty-image" style="background-image: url('https://randomuser.me/api/portraits/men/42.jpg');"></div>
+                <div class="faculty-info">
+                    <h3>Dr. Richard Feynman</h3>
+                    <p>Professor, Physics</p>
+                    <p class="faculty-credentials">Ph.D. in Theoretical Physics, Caltech</p>
+                    <p class="faculty-specialty">Quantum Mechanics, Particle Physics</p>
+                    <div class="faculty-social">
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-globe"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faculty-card" data-department="physics">
+                <div class="faculty-image" style="background-image: url('https://randomuser.me/api/portraits/women/44.jpg');"></div>
+                <div class="faculty-info">
+                    <h3>Dr. Marie Curie</h3>
+                    <p>Professor, Physics</p>
+                    <p class="faculty-credentials">Ph.D. in Physics, Sorbonne University</p>
+                    <p class="faculty-specialty">Radioactivity, Nuclear Physics</p>
+                    <div class="faculty-social">
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-globe"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Business Professors -->
+            <div class="faculty-card" data-department="business">
+                <div class="faculty-image" style="background-image: url('https://randomuser.me/api/portraits/men/32.jpg');"></div>
+                <div class="faculty-info">
+                    <h3>Prof. Adam Smith</h3>
+                    <p>Professor, Business Administration</p>
+                    <p class="faculty-credentials">Ph.D. in Economics, Harvard</p>
+                    <p class="faculty-specialty">Economics, Market Analysis</p>
+                    <div class="faculty-social">
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-globe"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faculty-card" data-department="business">
+                <div class="faculty-image" style="background-image: url('https://randomuser.me/api/portraits/women/33.jpg');"></div>
+                <div class="faculty-info">
+                    <h3>Dr. Indra Nooyi</h3>
+                    <p>Associate Professor, Business Administration</p>
+                    <p class="faculty-credentials">MBA, Yale School of Management</p>
+                    <p class="faculty-specialty">Strategic Management, Leadership</p>
+                    <div class="faculty-social">
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-globe"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Literature Professors -->
+            <div class="faculty-card" data-department="literature">
+                <div class="faculty-image" style="background-image: url('https://randomuser.me/api/portraits/women/68.jpg');"></div>
+                <div class="faculty-info">
+                    <h3>Prof. Jane Austen</h3>
+                    <p>Professor, Literature</p>
+                    <p class="faculty-credentials">Ph.D. in English Literature, Oxford</p>
+                    <p class="faculty-specialty">19th Century Literature, Fiction Writing</p>
+                    <div class="faculty-social">
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-globe"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faculty-card" data-department="literature">
+                <div class="faculty-image" style="background-image: url('https://randomuser.me/api/portraits/men/51.jpg');"></div>
+                <div class="faculty-info">
+                    <h3>Dr. William Shakespeare</h3>
+                    <p>Professor, Literature</p>
+                    <p class="faculty-credentials">Ph.D. in Dramatic Arts, Cambridge</p>
+                    <p class="faculty-specialty">Drama, Poetry, Renaissance Literature</p>
+                    <div class="faculty-social">
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-globe"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chemistry Professors -->
+            <div class="faculty-card" data-department="chemistry">
+                <div class="faculty-image" style="background-image: url('https://randomuser.me/api/portraits/men/67.jpg');"></div>
+                <div class="faculty-info">
+                    <h3>Dr. Dmitri Mendeleev</h3>
+                    <p>Professor, Chemistry</p>
+                    <p class="faculty-credentials">Ph.D. in Chemistry, Stanford</p>
+                    <p class="faculty-specialty">Organic Chemistry, Molecular Structure</p>
+                    <div class="faculty-social">
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-globe"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faculty-card" data-department="chemistry">
+                <div class="faculty-image" style="background-image: url('https://randomuser.me/api/portraits/women/55.jpg');"></div>
+                <div class="faculty-info">
+                    <h3>Dr. Rosalind Franklin</h3>
+                    <p>Associate Professor, Chemistry</p>
+                    <p class="faculty-credentials">Ph.D. in Physical Chemistry, Cambridge</p>
+                    <p class="faculty-specialty">X-ray Crystallography, Molecular Biology</p>
+                    <div class="faculty-social">
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-globe"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Faculty Leadership Section -->
+    <section class="leadership">
+        <h2>Faculty Leadership</h2>
+        <div class="leadership-grid">
+            <div class="leadership-card">
+                <div class="leadership-image" style="background-image: url('https://randomuser.me/api/portraits/men/77.jpg');"></div>
+                <div class="leadership-info">
+                    <h3>Dr. Robert Einstein</h3>
+                    <p>Dean of Academic Affairs</p>
+                    <p>Overseeing academic programs and faculty development across all departments.</p>
+                </div>
+            </div>
+            <div class="leadership-card">
+                <div class="leadership-image" style="background-image: url('https://randomuser.me/api/portraits/women/75.jpg');"></div>
+                <div class="leadership-info">
+                    <h3>Dr. Eleanor Roosevelt</h3>
+                    <p>Dean of Research</p>
+                    <p>Leading research initiatives and managing research funding across the college.</p>
+                </div>
+            </div>
+            <div class="leadership-card">
+                <div class="leadership-image" style="background-image: url('https://randomuser.me/api/portraits/men/22.jpg');"></div>
+                <div class="leadership-info">
+                    <h3>Dr. Nelson Mandela</h3>
+                    <p>Dean of Student Affairs</p>
+                    <p>Supporting student life, extracurricular activities, and welfare programs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>CHARUSAT</h3>
+                <p>Inspiring Excellence, Shaping Futures</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="departments.html">Departments</a></li>
+                    <li><a href="faculty.html">Faculty</a></li>
+                    <li><a href="library.html">Library</a></li>
+                    <li><a href="timetable.html">Timetable</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> CHARUSAT Changa , Anand , Gujarat , India ,388421</p>
+                <p><i class="fas fa-phone"></i> +91 9925842422</p>
+                <p><i class="fas fa-envelope"></i> 23cs004@charusat.edu.in</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy;  NAME: ZEEL BARVALIYA    ID:23CS004    CSE-CSPIT. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Faculty Filter and Search
+        document.addEventListener('DOMContentLoaded', function() {
+            const facultyCards = document.querySelectorAll('.faculty-card');
+            const searchInput = document.getElementById('faculty-search');
+            const departmentSelect = document.getElementById('department-select');
+            
+            // Search functionality
+            searchInput.addEventListener('input', filterFaculty);
+            
+            // Department filter
+            departmentSelect.addEventListener('change', filterFaculty);
+            
+            function filterFaculty() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const selectedDepartment = departmentSelect.value;
+                
+                facultyCards.forEach(card => {
+                    const facultyName = card.querySelector('h3').textContent.toLowerCase();
+                    const facultyDepartment = card.getAttribute('data-department');
+                    const facultyInfo = card.querySelector('.faculty-info').textContent.toLowerCase();
+                    
+                    const matchesSearch = facultyName.includes(searchTerm) || facultyInfo.includes(searchTerm);
+                    const matchesDepartment = selectedDepartment === 'all' || facultyDepartment === selectedDepartment;
+                    
+                    if (matchesSearch && matchesDepartment) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                        }, 100);
+                    } else {
+                        card.style.opacity = '0';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            }
+        });
+    </script>
+    <style>
+        /* Faculty Page Specific Styles */
+        .faculty {
+            padding: 5rem 5% 3rem;
+        }
+        
+        .faculty-filter {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .search-box {
+            display: flex;
+            max-width: 400px;
+            width: 100%;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--gray);
+            border-right: none;
+            border-radius: 5px 0 0 5px;
+            font-size: 1rem;
+        }
+        
+        .search-box button {
+            padding: 0.8rem 1.2rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .search-box button:hover {
+            background: #8a45b5;
+        }
+        
+        .department-filter select {
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--gray);
+            border-radius: 5px;
+            font-size: 1rem;
+            min-width: 200px;
+        }
+        
+        .faculty-credentials, .faculty-specialty {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 0.3rem 0;
+        }
+        
+        /* Leadership Section */
+        .leadership {
+            padding: 3rem 5% 5rem;
+            background: #f5f5f5;
+        }
+        
+        .leadership h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .leadership h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: var(--primary-gradient);
+        }
+        
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .leadership-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            animation: fadeIn 0.5s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .leadership-card:nth-child(1) { animation-delay: 0.1s; }
+        .leadership-card:nth-child(2) { animation-delay: 0.3s; }
+        .leadership-card:nth-child(3) { animation-delay: 0.5s; }
+        
+        .leadership-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .leadership-image {
+            height: 300px;
+            background-position: center;
+            background-size: cover;
+        }
+        
+        .leadership-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .leadership-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .leadership-info p:first-of-type {
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .leadership-info p:last-child {
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .faculty-filter {
+                flex-direction: column;
+            }
+            
+            .search-box, .department-filter {
+                width: 100%;
+                max-width: 100%;
+            }
+            
+            .department-filter select {
+                width: 100%;
+            }
+        }
+    </style>
+</body>
+</html> 

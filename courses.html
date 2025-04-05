@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHARUSAT - Courses</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .courses {
+            padding: 5rem 5%;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            justify-content: center;
+        }
+        
+        .filter-button {
+            padding: 0.7rem 1.5rem;
+            background: white;
+            border: 2px solid var(--gray);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .filter-button:hover, .filter-button.active {
+            background: var(--primary-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 5px 15px rgba(106, 48, 147, 0.3);
+        }
+        
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .course-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            animation: fadeIn 0.5s ease-out forwards;
+            opacity: 0;
+            position: relative;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .course-image {
+            height: 200px;
+            background-position: center;
+            background-size: cover;
+            position: relative;
+        }
+        
+        .course-category {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .course-content {
+            padding: 1.5rem;
+        }
+        
+        .course-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.7rem;
+            transition: var(--transition);
+        }
+        
+        .course-card:hover .course-title {
+            color: var(--primary);
+        }
+        
+        .course-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .course-detail {
+            display: flex;
+            align-items: center;
+        }
+        
+        .course-detail i {
+            margin-right: 5px;
+            color: var(--primary);
+        }
+        
+        .course-description {
+            margin-bottom: 1.5rem;
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .course-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--gray);
+        }
+        
+        .course-instructor {
+            display: flex;
+            align-items: center;
+        }
+        
+        .instructor-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-position: center;
+            background-size: cover;
+            margin-right: 10px;
+        }
+        
+        .instructor-name {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="./logo3.jpg" alt="CHARUSAT Logo" class="logo-image">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="courses.html" class="active">Courses</a></li>
+                <li><a href="departments.html">Departments</a></li>
+                <li><a href="faculty.html">Faculty</a></li>
+                <li><a href="library.html">Library</a></li>
+                <li><a href="timetable.html">Timetable</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <h1>Our Courses</h1>
+        <p>Discover a wide range of courses designed to prepare you for success in your chosen field.</p>
+        <div class="breadcrumb">
+            <a href="index.html">Home</a>
+            <span>/</span>
+            <a href="courses.html">Courses</a>
+        </div>
+    </section>
+
+    <section class="courses">
+        <div class="filter-buttons">
+            <button class="filter-button active" data-filter="all">All Courses</button>
+            <button class="filter-button" data-filter="science">Science</button>
+            <button class="filter-button" data-filter="arts">Arts</button>
+            <button class="filter-button" data-filter="business">Business</button>
+            <button class="filter-button" data-filter="technology">Technology</button>
+        </div>
+
+        <div class="course-grid">
+            <!-- Computer Science Course -->
+            <div class="course-card" data-category="technology">
+                <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1550439062-609e1531270e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');">
+                    <div class="course-category">Technology</div>
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">Bachelor of Computer Science</h3>
+                    <div class="course-details">
+                        <div class="course-detail">
+                            <i class="far fa-clock"></i>
+                            <span>4 Years</span>
+                        </div>
+                        <div class="course-detail">
+                            <i class="far fa-user"></i>
+                            <span>120 Credits</span>
+                        </div>
+                        <div class="course-detail">
+                            <i class="far fa-calendar"></i>
+                            <span>Fall/Spring</span>
+                        </div>
+                    </div>
+                    <p class="course-description">Learn programming, algorithms, data structures, artificial intelligence, and other aspects of computer science.</p>
+                    <div class="course-footer">
+                        <div class="course-instructor">
+                            <div class="instructor-avatar" style="background-image: url('https://randomuser.me/api/portraits/men/11.jpg');"></div>
+                            <div class="instructor-name">Dr. Alan Turing</div>
+                        </div>
+                        <a href="#" class="read-more">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Physics Course -->
+            <div class="course-card" data-category="science">
+                <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');">
+                    <div class="course-category">Science</div>
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">Bachelor of Science in Physics</h3>
+                    <div class="course-details">
+                        <div class="course-detail">
+                            <i class="far fa-clock"></i>
+                            <span>3 Years</span>
+                        </div>
+                        <div class="course-detail">
+                            <i class="far fa-user"></i>
+                            <span>110 Credits</span>
+                        </div>
+                        <div class="course-detail">
+                            <i class="far fa-calendar"></i>
+                            <span>Fall Only</span>
+                        </div>
+                    </div>
+                    <p class="course-description">Study mechanics, electricity and magnetism, thermodynamics, quantum mechanics, and relativity.</p>
+                    <div class="course-footer">
+                        <div class="course-instructor">
+                            <div class="instructor-avatar" style="background-image: url('https://randomuser.me/api/portraits/women/44.jpg');"></div>
+                            <div class="instructor-name">Dr. Marie Curie</div>
+                        </div>
+                        <a href="#" class="read-more">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Literature Course -->
+            <div class="course-card" data-category="arts">
+                <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');">
+                    <div class="course-category">Arts</div>
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">Bachelor of Arts in Literature</h3>
+                    <div class="course-details">
+                        <div class="course-detail">
+                            <i class="far fa-clock"></i>
+                            <span>3 Years</span>
+                        </div>
+                        <div class="course-detail">
+                            <i class="far fa-user"></i>
+                            <span>100 Credits</span>
+                        </div>
+                        <div class="course-detail">
+                            <i class="far fa-calendar"></i>
+                            <span>Fall/Spring</span>
+                        </div>
+                    </div>
+                    <p class="course-description">Explore classical and contemporary literature, poetry, drama, and literary criticism.</p>
+                    <div class="course-footer">
+                        <div class="course-instructor">
+                            <div class="instructor-avatar" style="background-image: url('https://randomuser.me/api/portraits/women/68.jpg');"></div>
+                            <div class="instructor-name">Prof. Jane Austen</div>
+                        </div>
+                        <a href="#" class="read-more">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Business Administration Course -->
+            <div class="course-card" data-category="business">
+                <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1460794418188-1bb7dba2720d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');">
+                    <div class="course-category">Business</div>
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">Bachelor of Business Administration</h3>
+                    <div class="course-details">
+                        <div class="course-detail">
+                            <i class="far fa-clock"></i>
+                            <span>4 Years</span>
+                        </div>
+                        <div class="course-detail">
+                            <i class="far fa-user"></i>
+                            <span>120 Credits</span>
+                        </div>
+                        <div class="course-detail">
+                            <i class="far fa-calendar"></i>
+                            <span>Fall/Spring</span>
+                        </div>
+                    </div>
+                    <p class="course-description">Gain skills in management, marketing, finance, accounting, and entrepreneurship.</p>
+                    <div class="course-footer">
+                        <div class="course-instructor">
+                            <div class="instructor-avatar" style="background-image: url('https://randomuser.me/api/portraits/men/32.jpg');"></div>
+                            <div class="instructor-name">Prof. Adam Smith</div>
+                        </div>
+                        <a href="#" class="read-more">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chemistry Course -->
+            <div class="course-card" data-category="science">
+                <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');">
+                    <div class="course-category">Science</div>
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">Bachelor of Science in Chemistry</h3>
+                    <div class="course-details">
+                        <div class="course-detail">
+                            <i class="far fa-clock"></i>
+                            <span>3 Years</span>
+                        </div>
+                        <div class="course-detail">
+                            <i class="far fa-user"></i>
+                            <span>110 Credits</span>
+                        </div>
+                        <div class="course-detail">
+                            <i class="far fa-calendar"></i>
+                            <span>Fall Only</span>
+                        </div>
+                    </div>
+                    <p class="course-description">Study organic chemistry, inorganic chemistry, physical chemistry, and analytical techniques.</p>
+                    <div class="course-footer">
+                        <div class="course-instructor">
+                            <div class="instructor-avatar" style="background-image: url('https://randomuser.me/api/portraits/men/67.jpg');"></div>
+                            <div class="instructor-name">Dr. Dmitri Mendeleev</div>
+                        </div>
+                        <a href="#" class="read-more">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fine Arts Course -->
+            <div class="course-card" data-category="arts">
+                <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');">
+                    <div class="course-category">Arts</div>
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">Bachelor of Fine Arts</h3>
+                    <div class="course-details">
+                        <div class="course-detail">
+                            <i class="far fa-clock"></i>
+                            <span>4 Years</span>
+                        </div>
+                        <div class="course-detail">
+                            <i class="far fa-user"></i>
+                            <span>120 Credits</span>
+                        </div>
+                        <div class="course-detail">
+                            <i class="far fa-calendar"></i>
+                            <span>Fall/Spring</span>
+                        </div>
+                    </div>
+                    <p class="course-description">Develop skills in painting, sculpture, photography, and other visual arts forms.</p>
+                    <div class="course-footer">
+                        <div class="course-instructor">
+                            <div class="instructor-avatar" style="background-image: url('https://randomuser.me/api/portraits/women/75.jpg');"></div>
+                            <div class="instructor-name">Prof. Frida Kahlo</div>
+                        </div>
+                        <a href="#" class="read-more">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>CHARUSAT</h3>
+                <p>Inspiring Excellence, Shaping Futures</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="departments.html">Departments</a></li>
+                    <li><a href="faculty.html">Faculty</a></li>
+                    <li><a href="library.html">Library</a></li>
+                    <li><a href="timetable.html">Timetable</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> CHARUSAT Changa , Anand , Gujarat , India ,388421</p>
+                <p><i class="fas fa-phone"></i> +91 9925842422</p>
+                <p><i class="fas fa-envelope"></i> 23cs004@charusat.edu.in</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy;  NAME: ZEEL BARVALIYA    ID:23CS004    CSE-CSPIT. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Course filtering functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-button');
+            const courseCards = document.querySelectorAll('.course-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Get filter value
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    // Filter courses
+                    courseCards.forEach(card => {
+                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                            }, 100);
+                        } else {
+                            card.style.opacity = '0';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

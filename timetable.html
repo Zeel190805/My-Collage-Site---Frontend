@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHARUSAT - Timetable</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Timetable specific styles */
+        .timetable-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            overflow-x: auto;
+        }
+        
+        .timetable {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 0 30px rgba(0, 105, 170, 0.15);
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            animation: fadeIn 1s ease-out forwards;
+        }
+        
+        .timetable th, .timetable td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #eaeaea;
+            position: relative;
+        }
+        
+        .timetable th {
+            background: var(--primary-gradient);
+            color: white;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        .timetable tr:nth-child(even) {
+            background-color: #f5f9ff;
+        }
+        
+        .timetable-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .timetable-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .timetable-header h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .timetable-header p {
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        .time-column {
+            width: 120px;
+            background-color: #f0f7ff;
+            font-weight: 500;
+        }
+        
+        .timetable .time-cell {
+            display: flex;
+            flex-direction: column;
+            font-size: 0.9rem;
+        }
+        
+        .time-cell .time-range {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .break-row {
+            background-color: #f0f7ff !important;
+        }
+        
+        .break-row td {
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .course-cell {
+            transition: all 0.3s ease;
+            cursor: default;
+            font-weight: 500;
+        }
+        
+        .course-cell:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 105, 170, 0.2);
+            z-index: 10;
+        }
+        
+        .room-info {
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 5px;
+            display: block;
+        }
+        
+        /* Different course types with different colors */
+        .lecture {
+            background-color: rgba(0, 105, 170, 0.1);
+            color: var(--primary);
+        }
+        
+        .lab {
+            background-color: rgba(255, 127, 50, 0.1);
+            color: var(--secondary);
+        }
+        
+        .project {
+            background-color: rgba(100, 200, 100, 0.1);
+            color: #2e8b57;
+        }
+        
+        /* Animation for timetable rows */
+        .row-animate {
+            animation-name: slideIn;
+            animation-timing-function: ease-out;
+            animation-fill-mode: both;
+            animation-duration: 0.5s;
+        }
+        
+        .row-animate:nth-child(1) { animation-delay: 0.1s; }
+        .row-animate:nth-child(2) { animation-delay: 0.2s; }
+        .row-animate:nth-child(3) { animation-delay: 0.3s; }
+        .row-animate:nth-child(4) { animation-delay: 0.4s; }
+        .row-animate:nth-child(5) { animation-delay: 0.5s; }
+        .row-animate:nth-child(6) { animation-delay: 0.6s; }
+        .row-animate:nth-child(7) { animation-delay: 0.7s; }
+        .row-animate:nth-child(8) { animation-delay: 0.8s; }
+        .row-animate:nth-child(9) { animation-delay: 0.9s; }
+        
+        /* Download button */
+        .download-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.8rem 2rem;
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0, 105, 170, 0.4);
+            text-align: center;
+            animation: fadeIn 1s ease-out 1s forwards;
+            opacity: 0;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(0, 105, 170, 0.6);
+        }
+        
+        .download-btn i {
+            margin-right: 8px;
+        }
+        
+        /* Legend section */
+        .timetable-legend {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            animation: fadeIn 1s ease-out 1.2s forwards;
+            opacity: 0;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        
+        .lecture-color {
+            background-color: rgba(0, 105, 170, 0.1);
+        }
+        
+        .lab-color {
+            background-color: rgba(255, 127, 50, 0.1);
+        }
+        
+        .project-color {
+            background-color: rgba(100, 200, 100, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .timetable th, .timetable td {
+                padding: 10px 5px;
+                font-size: 0.8rem;
+            }
+            
+            .time-cell .time-range {
+                font-size: 0.7rem;
+            }
+            
+            .room-info {
+                font-size: 0.7rem;
+            }
+            
+            .timetable-header h2 {
+                font-size: 1.5rem;
+            }
+            
+            .timetable-header h3 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="./logo3.jpg" alt="CHARUSAT Logo" class="logo-image">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="departments.html">Departments</a></li>
+                <li><a href="faculty.html">Faculty</a></li>
+                <li><a href="library.html">Library</a></li>
+                <li><a href="timetable.html" class="active">Timetable</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <h1>Class Timetable</h1>
+        <p>View your class schedule and academic timetable</p>
+        <div class="breadcrumb">
+            <a href="index.html">Home</a>
+            <span>/</span>
+            <a href="timetable.html">Timetable</a>
+        </div>
+    </section>
+
+    <section class="timetable-section">
+        <div class="timetable-container">
+            <div class="timetable-header">
+                <h2>CHANDUBHAI S. PATEL INSTITUTE OF TECHNOLOGY (CSE DEPT)</h2>
+                <h3>CSE 4TH CSE - 1</h3>
+                <p>Academic Year: 2024-25</p>
+            </div>
+            
+            <table class="timetable">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Mon</th>
+                        <th>Tue</th>
+                        <th>Wed</th>
+                        <th>Thu</th>
+                        <th>Fri</th>
+                        <th>Sat</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="row-animate">
+                        <td class="time-column">
+                            <div class="time-cell">
+                                <span>1</span>
+                                <span class="time-range">9:10 - 10:10</span>
+                            </div>
+                        </td>
+                        <td class="course-cell lecture">DAA</td>
+                        <td class="course-cell lab">
+                            PYT HON LAB
+                            <span class="room-info">VP</span>
+                        </td>
+                        <td class="course-cell lab">
+                            DAA LAB
+                        </td>
+                        <td class="course-cell lab">
+                            DAA LAB
+                        </td>
+                        <td class="course-cell lab">
+                            OS LAB
+                        </td>
+                        <td class="course-cell lecture">
+                            OS
+                            <span class="room-info">AP</span>
+                        </td>
+                    </tr>
+                    
+                    <tr class="row-animate">
+                        <td class="time-column">
+                            <div class="time-cell">
+                                <span>2</span>
+                                <span class="time-range">10:10 - 11:10</span>
+                            </div>
+                        </td>
+                        <td class="course-cell lecture">
+                            DCN
+                            <span class="room-info">BP</span>
+                        </td>
+                        <td class="course-cell lab">
+                            PYT HON LAB
+                        </td>
+                        <td class="course-cell lab">
+                            DAA LAB
+                        </td>
+                        <td class="course-cell lab">
+                            OS LAB
+                        </td>
+                        <td class="course-cell project">
+                            PROJECT-II LAB
+                        </td>
+                        <td class="course-cell lecture">
+                            DAA
+                            <span class="room-info">ART</span>
+                        </td>
+                    </tr>
+                    
+                    <tr class="row-animate break-row">
+                        <td class="time-column">
+                            <div class="time-cell">
+                                <span>BREAK</span>
+                                <span class="time-range">11:10 - 12:10</span>
+                            </div>
+                        </td>
+                        <td colspan="6">BREAK</td>
+                    </tr>
+                    
+                    <tr class="row-animate">
+                        <td class="time-column">
+                            <div class="time-cell">
+                                <span>3</span>
+                                <span class="time-range">12:10 - 13:10</span>
+                            </div>
+                        </td>
+                        <td class="course-cell lab">
+                            DBMS LAB
+                        </td>
+                        <td class="course-cell lab">
+                            DBMS LAB
+                        </td>
+                        <td class="course-cell lab">
+                            PYT HON LAB
+                        </td>
+                        <td class="course-cell lecture">
+                            HS4
+                        </td>
+                        <td class="course-cell lecture">
+                            DAA
+                            <span class="room-info">ART</span>
+                        </td>
+                        <td class="course-cell lab">
+                            DBMS LAB
+                        </td>
+                    </tr>
+                    
+                    <tr class="row-animate">
+                        <td class="time-column">
+                            <div class="time-cell">
+                                <span>4</span>
+                                <span class="time-range">13:10 - 14:10</span>
+                            </div>
+                        </td>
+                        <td class="course-cell lab">
+                            DBMS LAB
+                        </td>
+                        <td class="course-cell lab">
+                            DBMS LAB BYOP
+                        </td>
+                        <td class="course-cell lab">
+                            PYT HON LAB
+                        </td>
+                        <td class="course-cell lecture">
+                            DCN
+                            <span class="room-info">HY</span>
+                        </td>
+                        <td class="course-cell lecture">
+                            DAA LAB
+                        </td>
+                        <td class="course-cell project">
+                            PROJECT-II LAB
+                        </td>
+                    </tr>
+                    
+                    <tr class="row-animate break-row">
+                        <td class="time-column">
+                            <div class="time-cell">
+                                <span>BREAK</span>
+                                <span class="time-range">14:10 - 14:20</span>
+                            </div>
+                        </td>
+                        <td colspan="6">BREAK</td>
+                    </tr>
+                    
+                    <tr class="row-animate">
+                        <td class="time-column">
+                            <div class="time-cell">
+                                <span>5</span>
+                                <span class="time-range">14:20 - 15:20</span>
+                            </div>
+                        </td>
+                        <td class="course-cell lecture">
+                            DBMS
+                            <span class="room-info">DR</span>
+                        </td>
+                        <td class="course-cell lab">
+                            DBMS LAB
+                        </td>
+                        <td class="course-cell lab">
+                            DBMS LAB
+                        </td>
+                        <td class="course-cell lecture">
+                            OS
+                            <span class="room-info">HAT</span>
+                        </td>
+                        <td class="course-cell lecture">
+                            OS
+                            <span class="room-info">HAT</span>
+                        </td>
+                        <td class="course-cell lecture">
+                            DCN
+                            <span class="room-info">HY</span>
+                        </td>
+                    </tr>
+                    
+                    <tr class="row-animate">
+                        <td class="time-column">
+                            <div class="time-cell">
+                                <span>6</span>
+                                <span class="time-range">15:20 - 16:20</span>
+                            </div>
+                        </td>
+                        <td class="course-cell lecture">
+                            DAA
+                            <span class="room-info">VP</span>
+                        </td>
+                        <td class="course-cell lab">
+                            DBMS LAB BYOP
+                        </td>
+                        <td class="course-cell lab">
+                            LAB ESS
+                        </td>
+                        <td class="course-cell lecture">
+                            DBMS
+                            <span class="room-info">DR</span>
+                        </td>
+                        <td class="course-cell lecture">
+                            DBMS
+                            <span class="room-info">DR</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="timetable-legend">
+                <div class="legend-item">
+                    <div class="legend-color lecture-color"></div>
+                    <span>Lecture</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color lab-color"></div>
+                    <span>Lab</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color project-color"></div>
+                    <span>Project</span>
+                </div>
+            </div>
+            
+            <div style="text-align: center;">
+                <a href="#" class="download-btn">
+                    <i class="fas fa-download"></i> Download Timetable
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>CHARUSAT</h3>
+                <p>Charotar University of Science and Technology</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="departments.html">Departments</a></li>
+                    <li><a href="faculty.html">Faculty</a></li>
+                    <li><a href="library.html">Library</a></li>
+                    <li><a href="timetable.html">Timetable</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> CHARUSAT Changa, Anand, Gujarat, India, 388421</p>
+                <p><i class="fas fa-phone"></i> +91 9925842422</p>
+                <p><i class="fas fa-envelope"></i> 23cs004@charusat.edu.in</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; NAME: ZEEL BARVALIYA    ID:23CS004    CSE-CSPIT. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate cells on hover with slight delay for cascading effect
+            const cells = document.querySelectorAll('.course-cell');
+            cells.forEach((cell, index) => {
+                cell.addEventListener('mouseenter', function() {
+                    const siblings = this.parentNode.querySelectorAll('.course-cell');
+                    siblings.forEach((sibling, sibIndex) => {
+                        if (sibling !== this) {
+                            setTimeout(() => {
+                                sibling.style.opacity = '0.7';
+                            }, sibIndex * 50);
+                        }
+                    });
+                });
+                
+                cell.addEventListener('mouseleave', function() {
+                    const siblings = this.parentNode.querySelectorAll('.course-cell');
+                    siblings.forEach(sibling => {
+                        sibling.style.opacity = '1';
+                    });
+                });
+            });
+            
+            // Highlight same subjects across the timetable
+            const courseTypes = ['DAA', 'OS', 'DCN', 'DBMS', 'PYT HON', 'PROJECT'];
+            
+            courseTypes.forEach(type => {
+                const relatedCells = document.querySelectorAll(`.course-cell:not(.highlight-disabled)`);
+                
+                relatedCells.forEach(cell => {
+                    cell.addEventListener('mouseenter', function() {
+                        if (this.textContent.includes(type)) {
+                            relatedCells.forEach(relatedCell => {
+                                if (relatedCell.textContent.includes(type)) {
+                                    relatedCell.classList.add('highlight-related');
+                                }
+                            });
+                        }
+                    });
+                    
+                    cell.addEventListener('mouseleave', function() {
+                        relatedCells.forEach(relatedCell => {
+                            relatedCell.classList.remove('highlight-related');
+                        });
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
